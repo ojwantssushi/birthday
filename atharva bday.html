@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>happy birthday atharva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--night:#14183a;--deep:#0b0e26;--flame:#ffc94d;--pink:#ff8fab;--frost:#ffe3ea;--paper:#fff8ec;--ink:#2a2350;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{height:100%;margin:0;background:radial-gradient(120% 80% at 50% 0%,var(--night),var(--deep));color:var(--frost);font-family:'Gaegu',ui-rounded,'Comic Sans MS',cursive;font-size:22px;overflow:hidden}
+.stars{position:fixed;inset:0;pointer-events:none}
+.stage{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center}
+h1{font-family:'Bagel Fat One','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:400;font-size:clamp(38px,11vw,68px);line-height:1.02;margin:0 0 8px;color:var(--frost);letter-spacing:.5px}
+p{margin:0}
+.hint{opacity:.8;min-height:30px;margin-top:6px}
+button{font:inherit;cursor:pointer;border:0}
+.btn{background:var(--flame);color:var(--ink);font-weight:700;font-size:24px;padding:10px 26px;border-radius:999px;box-shadow:0 5px 0 #d99a1d;transition:transform .12s,box-shadow .12s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #d99a1d}
+.btn.ghost{background:transparent;color:var(--frost);box-shadow:inset 0 0 0 2px var(--frost)}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;transition:opacity .6s}
+.hide{opacity:0;pointer-events:none}
+#cakeWrap{width:min(88vw,360px);position:relative}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.flame{cursor:pointer;transform-box:fill-box;transform-origin:50% 100%;animation:fl 1s ease-in-out infinite alternate}
+.flame:nth-child(2n){animation-duration:.8s}
+.flame.out{animation:none;opacity:0;transform:scale(.2);transition:all .35s}
+@keyframes fl{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.92,1.12) rotate(3deg)}}
+.glow{transition:opacity .6s}
+#cake{cursor:pointer}
+#note{position:absolute;left:50%;top:-6px;transform:translate(-50%,-100%);background:var(--paper);color:var(--ink);padding:8px 16px;border-radius:14px;font-size:21px;width:max-content;max-width:86vw;opacity:0;transition:opacity .25s;pointer-events:none}
+#note.on{opacity:1}
+#after{opacity:0;pointer-events:none;transition:opacity .8s;margin-top:10px}
+#after.on{opacity:1;pointer-events:auto}
+#after h2{font-family:'Bagel Fat One',system-ui,sans-serif;font-weight:400;font-size:clamp(30px,9vw,48px);margin:0 0 12px;color:var(--flame)}
+#modal,#reel{position:fixed;inset:0;background:rgba(8,10,30,.8);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:5}
+#modal.on,#reel.on{opacity:1;pointer-events:auto}
+.letter{background:var(--paper);color:var(--ink);border-radius:6px;width:min(100%,420px);max-height:82%;overflow:auto;padding:26px 24px 22px;transform:rotate(-1.2deg) translateY(30px);transition:transform .4s;box-shadow:0 18px 40px rgba(0,0,0,.45);font-size:25px;line-height:1.3;text-align:left;
+background-image:repeating-linear-gradient(transparent 0 32px,rgba(122,59,105,.14) 32px 33px)}
+#modal.on .letter{transform:rotate(-1.2deg) translateY(0)}
+.letter .to{font-weight:700;margin-bottom:8px}
+.letter .msg{white-space:pre-wrap}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 14px;padding:6px 4px 2px}
+.pol{position:relative;background:#fffdf6;padding:7px 7px 26px;box-shadow:0 6px 16px rgba(0,0,0,.4);transform:rotate(var(--t));cursor:pointer;border:0;transition:transform .15s}
+.pol:active{transform:rotate(0) scale(1.04)}
+.pol img,.pol video{pointer-events:none;display:block;width:100%;aspect-ratio:1/1;object-fit:cover;background:#ddd}
+.pol:before{content:"";position:absolute;left:50%;top:-9px;width:46px;height:16px;margin-left:-23px;background:rgba(255,201,77,.7);transform:rotate(-4deg)}
+.pol i{position:absolute;left:50%;top:44%;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;background:rgba(20,24,58,.62)}
+.pol i:after{content:"";position:absolute;left:16px;top:12px;border-left:15px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent}
+#reel .scrap{width:min(100%,430px);max-height:86%;overflow:auto;padding:6px 6px 12px;text-align:center}
+#reel h3{font-family:'Bagel Fat One',system-ui,sans-serif;font-weight:400;font-size:34px;margin:4px 0 14px;color:var(--flame)}
+#vid{position:fixed;inset:0;background:rgba(5,6,18,.94);display:none;flex-direction:column;align-items:center;justify-content:center;padding:16px;z-index:8}
+#vid.on{display:flex}
+#vid video{max-width:100%;max-height:78%;border-radius:10px;background:#000}
+#vid .btn{margin-top:16px}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.letter .sig{margin-top:14px;text-align:right;font-weight:700}
+.letter button{margin:18px auto 0;display:block}
+.balloon{position:absolute;width:46px;height:58px;border-radius:50% 50% 48% 48%;cursor:pointer;animation:bob 3.2s ease-in-out infinite alternate;z-index:2}
+.balloon:after{content:"";position:absolute;left:50%;top:100%;width:1.5px;height:46px;background:rgba(255,227,234,.5)}
+.balloon:before{content:"";position:absolute;left:30%;top:16%;width:9px;height:14px;border-radius:50%;background:rgba(255,255,255,.45);transform:rotate(25deg)}
+.balloon.pop{animation:none;transform:scale(1.5);opacity:0;transition:all .18s}
+@keyframes bob{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-14px) rotate(3deg)}}
+.heart{position:fixed;pointer-events:none;z-index:6;font-size:26px;color:var(--pink);animation:up 1.4s ease-out forwards}
+@keyframes up{to{transform:translateY(-110px) scale(1.3) rotate(var(--r));opacity:0}}
+.gifts{display:flex;gap:14px;justify-content:center;margin-bottom:14px}
+.gift{background:none;font-size:42px;line-height:1;padding:4px;animation:wig 2.4s ease-in-out infinite}
+.gift:nth-child(2){animation-delay:.4s}.gift:nth-child(3){animation-delay:.8s}
+.gift.opened{animation:none;opacity:.45;transform:scale(.85)}
+@keyframes wig{0%,70%,100%{transform:rotate(0)}78%{transform:rotate(-9deg)}86%{transform:rotate(9deg)}94%{transform:rotate(-5deg)}}
+#toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 22px);transform:translate(-50%,-20px);background:var(--paper);color:var(--ink);padding:10px 18px;border-radius:16px;width:max-content;max-width:88vw;text-align:center;opacity:0;pointer-events:none;transition:all .3s;z-index:7;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.small{width:min(56vw,230px)!important}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:4}
+@media (prefers-reduced-motion:reduce){.flame,.balloon,.gift{animation:none}}
+</style>
+</head>
+<body>
+<svg class="stars" id="stars" aria-hidden="true"></svg>
+<canvas id="cv"></canvas>
+<div id="toast"></div>
+
+<div class="stage">
+  <div class="screen" id="intro">
+    <h1 id="introTitle"></h1>
+    <p style="margin:0 0 22px;max-width:18em">i made you something. it's a little bit silly. open it?</p>
+    <button class="btn" id="go">open</button>
+  </div>
+
+  <div class="screen hide" id="scene">
+    <div class="balloon" style="left:6%;top:14%;background:#7ad7f0"></div>
+    <div class="balloon" style="right:7%;top:20%;background:#ff8fab;animation-delay:-1s"></div>
+    <div class="balloon" style="left:12%;top:58%;background:#b79cff;animation-delay:-2s"></div>
+    <div class="balloon" style="right:10%;top:60%;background:#8fe3b0;animation-delay:-.5s"></div>
+    <div id="cakeWrap">
+      <div id="note"></div>
+      <svg viewBox="0 0 300 290" role="img" aria-label="Birthday cake with five candles">
+        <ellipse cx="150" cy="262" rx="140" ry="16" fill="#0b0e26" opacity=".55"/>
+        <ellipse cx="150" cy="250" rx="132" ry="14" fill="#e9e4ff"/>
+        <g id="cake">
+          <rect x="48" y="170" width="204" height="78" rx="14" fill="#ff8fab"/>
+          <rect x="48" y="196" width="204" height="9" fill="#ffe3ea"/>
+          <rect x="70" y="122" width="160" height="52" rx="12" fill="#ffc2d1"/>
+          <path d="M70 134q0-14 14-14h132q14 0 14 14v6q-9 0-9 9t-9 0-9-9-9 9-9 0-9-9-9 9-9 0-9-9-9 9-9 0-9-9-9 9-9 0-9-9-9 9-9 0-9-9v-0z" fill="#ffe3ea"/>
+          <circle cx="92" cy="216" r="4" fill="#ffe3ea"/><circle cx="130" cy="228" r="4" fill="#ffe3ea"/><circle cx="170" cy="216" r="4" fill="#ffe3ea"/><circle cx="208" cy="228" r="4" fill="#ffe3ea"/>
+          <rect x="48" y="160" width="204" height="14" fill="transparent"/>
+        </g>
+        <g id="candles"></g>
+      </svg>
+    </div>
+    <p class="hint" id="hint">tap each flame to blow it out</p>
+    <button class="btn ghost" id="blow" style="margin-top:10px;font-size:20px;padding:6px 18px">or blow them all out</button>
+    <div id="after">
+      <h2 id="afterTitle"></h2>
+      <p style="margin-bottom:6px">tap your gifts</p>
+      <div class="gifts" id="gifts"></div>
+      <div class="row"><button class="btn" id="open">read your letter</button><button class="btn ghost" id="mem">watch our video</button></div>
+    </div>
+  </div>
+</div>
+
+<div id="vid"><video id="pv" controls playsinline></video><button class="btn" id="vclose">close</button></div>
+<div id="modal">
+  <div class="letter" role="dialog" aria-label="Letter">
+    <div class="to" id="to"></div>
+    <div class="msg" id="msg"></div>
+    <div class="sig" id="sig"></div>
+    <button class="btn" id="close">close</button>
+  </div>
+</div>
+
+<script>
+/* ---------- edit these ---------- */
+var NAME = "atharva";
+var FROM = "oj";
+var MESSAGE = "Happiest birthday to my baby.\n\nI love and miss you so much. You mean the world to me, and I'm forever grateful to have you in my life.";
+var COUPONS = [
+  "one very long hug, redeemable the next time we meet",
+  "you pick the movie and i won't complain (much)",
+  "one video call where i just watch you eat cake"
+];
+var NOTES = [
+  "you make far away feel close",
+  "my favorite hello is your name on my phone",
+  "i'm so proud of you",
+  "can't wait for our next hug"
+];
+/* -------------------------------- */
+var $=function(i){return document.getElementById(i)};
+$('introTitle').textContent="happy birthday, "+NAME;
+$('afterTitle').textContent="happy birthday, "+NAME;
+$('to').textContent="dear "+NAME+",";
+$('msg').textContent=MESSAGE;
+$('sig').textContent="love, "+FROM;
+
+// stars
+var st=$('stars'),ns='http://www.w3.org/2000/svg',s='';
+st.setAttribute('viewBox','0 0 400 800');st.setAttribute('preserveAspectRatio','xMidYMid slice');
+for(var i=0;i<46;i++){var x=Math.random()*400,y=Math.random()*800,r=Math.random()*1.4+.4;
+s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="#ffe9a8" opacity="'+(Math.random()*.6+.2).toFixed(2)+'"/>'}
+st.innerHTML=s;
+
+// candles
+var xs=[100,125,150,175,200],cols=['#7ad7f0','#ffe3ea','#ffc94d','#b79cff','#8fe3b0'],lit=xs.length,cs='';
+xs.forEach(function(x,i){
+  cs+='<rect x="'+(x-4)+'" y="92" width="8" height="32" rx="2" fill="'+cols[i]+'"/>'+
+  '<rect x="'+(x-4)+'" y="100" width="8" height="3" fill="#fff" opacity=".5"/>'+
+  '<g class="flame" data-i="'+i+'"><circle class="glow" cx="'+x+'" cy="78" r="16" fill="#ffc94d" opacity=".18"/>'+
+  '<path d="M'+x+' 62c7 8 8 14 0 22-8-8-7-14 0-22z" fill="#ffc94d"/><path d="M'+x+' 71c3 4 3 7 0 10-3-3-3-6 0-10z" fill="#fff4cf"/>'+
+  '<rect x="'+(x-14)+'" y="58" width="28" height="42" fill="transparent"/></g>';
+});
+$('candles').innerHTML=cs;
+
+// screens
+$('go').onclick=function(){$('intro').classList.add('hide');$('scene').classList.remove('hide');};
+
+function snuff(el){
+  if(el.classList.contains('out'))return;
+  el.classList.add('out');lit--;
+  if(lit===0)done();
+}
+Array.prototype.forEach.call(document.querySelectorAll('.flame'),function(f){f.addEventListener('click',function(e){e.stopPropagation();snuff(f)})});
+$('blow').onclick=function(){
+  var fl=document.querySelectorAll('.flame:not(.out)');
+  Array.prototype.forEach.call(fl,function(f,i){setTimeout(function(){snuff(f)},i*140)});
+};
+
+// cake taps -> little notes
+var ni=0,nt;
+$('cake').onclick=function(){
+  var n=$('note');n.textContent=NOTES[ni++%NOTES.length];n.classList.add('on');
+  clearTimeout(nt);nt=setTimeout(function(){n.classList.remove('on')},2600);
+};
+
+function done(){
+  $('hint').textContent="";$('blow').style.display='none';
+  $('after').classList.add('on');$('cakeWrap').classList.add('small');
+  setTimeout(confetti,250);setTimeout(confetti,900);
+}
+
+// toast
+var tt;
+function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){e.classList.remove('on')},3000)}
+var BAL=["happy birthday atharva!","you're my favorite person","pop! another year of you","miss you, tons"];
+var bi=0;
+Array.prototype.forEach.call(document.querySelectorAll('.balloon'),function(b){b.addEventListener('click',function(e){
+  e.stopPropagation();if(b.classList.contains('pop'))return;b.classList.add('pop');toast(BAL[bi++%BAL.length]);
+  setTimeout(function(){b.style.display='none'},200);burst(e.clientX,e.clientY);
+})});
+// gifts
+COUPONS.forEach(function(c){var g=document.createElement('button');g.className='gift';g.textContent='\uD83C\uDF81';g.setAttribute('aria-label','gift');
+  g.onclick=function(e){e.stopPropagation();g.classList.add('opened');g.textContent='\uD83D\uDC8C';toast(c);burst(e.clientX,e.clientY)};$('gifts').appendChild(g)});
+// hearts on tap
+function burst(x,y){for(var i=0;i<5;i++)heart(x+(Math.random()-.5)*40,y+(Math.random()-.5)*20)}
+function heart(x,y){var h=document.createElement('div');h.className='heart';h.textContent='\u2665';h.style.left=x+'px';h.style.top=y+'px';
+  h.style.setProperty('--r',((Math.random()-.5)*50)+'deg');h.style.color=['#ff8fab','#ffc94d','#b79cff'][Math.floor(Math.random()*3)];
+  document.body.appendChild(h);setTimeout(function(){h.remove()},1450)}
+document.addEventListener('pointerdown',function(e){if(e.target.closest('button,.flame,.balloon'))return;heart(e.clientX,e.clientY)});
+
+// video
+$('mem').onclick=function(){var v=$('pv');v.src='edit.mp4';$('vid').classList.add('on');v.play().catch(function(){})};
+$('vclose').onclick=function(){var v=$('pv');v.pause();v.removeAttribute('src');v.load();$('vid').classList.remove('on')};
+
+// letter
+$('open').onclick=function(){$('modal').classList.add('on');confetti()};
+$('close').onclick=function(){$('modal').classList.remove('on')};
+$('modal').onclick=function(e){if(e.target===this)this.classList.remove('on')};
+
+// confetti
+var cv=$('cv'),cx=cv.getContext('2d'),P=[],run=false,W,H;
+function size(){var d=window.devicePixelRatio||1;W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0)}
+size();addEventListener('resize',size);
+function confetti(){
+  var c=['#ffc94d','#ff8fab','#7ad7f0','#b79cff','#8fe3b0','#fff'];
+  for(var i=0;i<110;i++)P.push({x:W/2+(Math.random()-.5)*60,y:H*.55,vx:(Math.random()-.5)*14,vy:-Math.random()*15-4,w:Math.random()*8+5,h:Math.random()*5+3,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:c[i%c.length],a:1});
+  if(!run){run=true;requestAnimationFrame(tick)}
+}
+function tick(){
+  cx.clearRect(0,0,W,H);
+  P=P.filter(function(p){return p.a>0&&p.y<H+20});
+  P.forEach(function(p){p.vy+=.35;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;if(p.y>H*.7)p.a-=.02;
+    cx.save();cx.globalAlpha=Math.max(p.a,0);cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore()});
+  if(P.length)requestAnimationFrame(tick);else{run=false;cx.clearRect(0,0,W,H)}
+}
+</script>
+</body>
+</html>
